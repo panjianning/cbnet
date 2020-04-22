@@ -13,6 +13,7 @@ On COCO val2017
 backbone=dict(
     type='CBNet',
     num_repeat=2,
+    pretrained='/workspace/nas-data/checkpoint/imagenet/dual_res2net101_v1b_26w_4s-0812c246.pth',
     use_act=False,
     connect_norm_eval=True,
     backbone_type='Res2Net',
@@ -26,4 +27,15 @@ backbone=dict(
     stage_with_dcn=(False, True, True, True),
     frozen_stages=1,
     style='pytorch')
+```
+To get the pretrained model on imagenet like `dual_xxx.pth`:
+```
+def make_pretrained_model(input_path, output_path, repeat_num=2):
+    cp = torch.load(input_path)
+    keys = list(cp['state_dict'].keys())
+    for key in keys:
+        for i in range(repeat_num):
+            cp['state_dict']['cb{}.{}'.format(i + 1, key)] = cp['state_dict'][key]
+        cp['state_dict'].pop(key)
+    torch.save(cp, output_path)
 ```
