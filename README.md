@@ -9,7 +9,7 @@ On COCO val2017
 * `cascade_rcnn + dual resnet_vd200 + dcnv2 + nonlocal + fpn + 2.5x + soft-nms`: 52.2 mAP (weights are transfered from [CBResNet200-vd-FPN-Nonlocal](https://github.com/PaddlePaddle/PaddleDetection/blob/release/0.2/docs/MODEL_ZOO_cn.md) in paddle detection; 50.8 without soft-nms)
 
 ## backbone config example
-```python
+``` python
 backbone=dict(
     type='CBNet',
     num_repeat=2,
@@ -29,7 +29,7 @@ backbone=dict(
     style='pytorch')
 ```
 To get the pretrained model on imagenet like `dual_xxx.pth`:
-```
+``` python
 def make_pretrained_model(input_path, output_path, repeat_num=2):
     cp = torch.load(input_path)
     keys = list(cp['state_dict'].keys())
