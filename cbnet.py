@@ -53,12 +53,12 @@ class CBNet(nn.Module):
             self.add_module(backbone_name, backbone)
             self.backbone_names.append(backbone_name)
 
-        left_out_changes = [256, 512, 1024, 2048]
+        left_out_channels = [256, 512, 1024, 2048]
         right_in_channels = [64, 256, 512, 1024]
-        for i, _ in enumerate(left_out_changes):
+        for i, _ in enumerate(left_out_channels):
             conv = build_conv_layer(
                 backbone.conv_cfg,
-                left_out_changes[i],
+                left_out_channels[i],
                 right_in_channels[i],
                 kernel_size=1,
                 padding=0,
