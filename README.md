@@ -1,12 +1,17 @@
 # cbnet
-implement cbnet with mmdetection
+implement cbnet with [mmdetection](https://github.com/open-mmlab/mmdetection)
 
 ## Result
 
 On COCO val2017
 
-* `cascade_rcnn + dual res2net101 + dcnv2 + fpn + 1x`: 48.7 mAP
-* `cascade_rcnn + dual resnet_vd200 + dcnv2 + nonlocal + fpn + 2.5x + soft-nms`: 52.2 mAP (weights are transfered from [CBResNet200-vd-FPN-Nonlocal](https://github.com/PaddlePaddle/PaddleDetection/blob/release/0.2/docs/MODEL_ZOO_cn.md) in paddle detection; 50.8 without soft-nms)
+1. `cascade_rcnn + dual res2net101 + dcnv2 + fpn + 1x`: 48.7 mAP
+* Single scale training and testing
+
+2. `cascade_rcnn + dual resnet_vd200 + dcnv2 + nonlocal + fpn + 2.5x + soft-nms`: 52.2 mAP
+* Multiscale-training, single-scale testing
+* Weights are transfered from [CBResNet200-vd-FPN-Nonlocal](https://github.com/PaddlePaddle/PaddleDetection/blob/release/0.2/docs/MODEL_ZOO_cn.md) in paddle detection
+* mAP with vanilla nms： 50.8
 
 ## backbone config example
 ``` python
