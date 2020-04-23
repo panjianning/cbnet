@@ -5,7 +5,7 @@ implement cbnet with [mmdetection](https://github.com/open-mmlab/mmdetection)
 
 On COCO val2017
 
-1. `cascade_rcnn + dual res2net101 + dcnv2 + fpn + 1x`: 48.7 mAP
+1. `cascade_rcnn + dual res2net101 + dcnv2 + fpn + 1x`: 48.8 mAP
 * Single scale training and testing
 
 2. `cascade_rcnn + dual resnet_vd200 + dcnv2 + nonlocal + fpn + 2.5x + soft-nms`: 52.2 mAP
