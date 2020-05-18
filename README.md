@@ -13,6 +13,9 @@ On COCO val2017
 * Weights are transfered from [CBResNet200-vd-FPN-Nonlocal](https://github.com/PaddlePaddle/PaddleDetection/blob/release/0.2/docs/MODEL_ZOO_cn.md) in paddle detection
 * mAP with vanilla nms： 50.8
 
+---
+`non_local.py` is modified to adapt `NonLocal` module from paddledetection to mmdetection
+
 ## backbone config example
 ``` python
 backbone=dict(
