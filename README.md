@@ -49,7 +49,8 @@ def make_pretrained_model(input_path, output_path, repeat_num=2):
 ```
 
 ## FAQ
-### How to get the numpy-array-style weights in paddle detection
+### Paddle to PyTorch?
+1. get the numpy-array-style weights in paddle detection
 ```python
 from paddle import fluid
 import os
@@ -83,3 +84,4 @@ def load_var_dict(cfg_path, weight_path, device_id=-1):
 
     return var_dict
 ```
+2. Implement same models in mmdet, and do name mapping for variables.
