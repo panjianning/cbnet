@@ -47,3 +47,39 @@ def make_pretrained_model(input_path, output_path, repeat_num=2):
         cp['state_dict'].pop(key)
     torch.save(cp, output_path)
 ```
+
+## FAQ
+### How to get the numpy-array-style weights in paddle detection
+```python
+from paddle import fluid
+import os
+from ppdet.core.workspace import load_config, create
+import ppdet.utils.checkpoint as checkpoint
+import numpy as np
+from collections import OrderedDict
+import torch
+
+
+def load_var_dict(cfg_path, weight_path, device_id=-1):
+    place = fluid.CUDAPlace(0) if device_id >= 0 else fluid.CPUPlace()
+    exe = fluid.Executor(place)
+
+    cfg = load_config(cfg_path)
+    main_arch = cfg.architecture
+    model = create(main_arch)
+    startup_prog = fluid.Program()
+    infer_prog = fluid.Program()
+    with fluid.program_guard(infer_prog, startup_prog):
+        with fluid.unique_name.guard():
+            inputs_def = cfg['TestReader']['inputs_def']
+            inputs_def['iterable'] = True
+            feed_vars, loader = model.build_inputs(**inputs_def)
+            _ = model.test(feed_vars)
+    checkpoint.load_params(exe, infer_prog, weight_path)
+    var_dict = {}
+    for var in startup_prog.list_vars():
+        fluid_tensor = fluid.global_scope().find_var(var.name).get_tensor()
+        var_dict[var.name] = np.array(fluid_tensor)
+
+    return var_dict
+```
