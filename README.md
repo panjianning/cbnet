@@ -20,19 +20,16 @@ On COCO val2017
 ``` python
 backbone=dict(
     type='CBNet',
+    backbone_type='ResNet_VD',
     num_repeat=2,
-    pretrained='/workspace/nas-data/checkpoint/imagenet/dual_res2net101_v1b_26w_4s-0812c246.pth',
-    use_act=False, # this should be 'True' for checkpoints from paddle.
     connect_norm_eval=True,
-    backbone_type='Res2Net',
-    depth=101,
-    scale=4,
-    baseWidth=26,
-    num_stages=4,
+    depth=200,
     out_indices=(0, 1, 2, 3),
-    norm_cfg=dict(type='SyncBN', requires_grad=True),
+    norm_cfg=dict(type='BN', requires_grad=True),
+    norm_eval=True,
     dcn=dict(type='DCNv2', deformable_groups=1, fallback_on_stride=False),
     stage_with_dcn=(False, True, True, True),
+    stage_with_non_local=(False, False, True, False),
     frozen_stages=1,
     style='pytorch')
 ```
