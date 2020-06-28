@@ -2,7 +2,7 @@
 Implement cbnet with [mmdetection](https://github.com/open-mmlab/mmdetection). Please clone mmdet1.1.0 (other versions may need modifications), place the files（cbnet.py, resnet_vd.py, non_local.py, etc.） in the right directory.
 
 
-## Model Download
+## Model download
 
 |arch|backbone|Lr schd|box AP|download|
 |---|---|---|---|---|
